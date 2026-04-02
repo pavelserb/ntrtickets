@@ -2,7 +2,7 @@ name: Collect ticket sales
 
 on:
   schedule:
-    - cron: '0 21 * * *'    # daily at 21:00 UTC (midnight EET)
+    - cron: '0 6 * * *'     # daily at 06:00 UTC
   workflow_dispatch:          # manual trigger from GitHub UI
 
 permissions:
