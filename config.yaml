@@ -1,0 +1,24 @@
+events:
+  - name: "The Prodigy"
+    slug: "prodigy-2026"
+    event_date: "2026-06-27"         # date of the event (for forecasting)
+    telegram_chat_id: "-5237747866"  # Telegram group/chat ID for daily reports
+    report_base_url: "https://pavelserb.github.io/ntrtickets"
+    sales_target:
+      tickets: 6500       # target number of tickets (set when known)
+      revenue: 422500       # target revenue in EUR (set when known)
+    sources:
+      - type: mticket
+        provider_name: "mticket"
+        provider_link: "mticket.eu"
+        event_page_url: "https://lv.mticket.eu/en/riga/the-prodigy-riga-1538.html"
+        params:
+          event_id: "173167"
+      - type: bilesu_serviss
+        provider_name: "Biļešu Serviss"
+        provider_link: "bilesuserviss.lv"
+        event_page_url: "https://www.bilesuserviss.lv/biletes/3HKOANTH2L/the-prodigy"
+        params:
+          event_id: "496539"
+          legal_person_id: "4003"
+          sale_start: "2026-03-17"
