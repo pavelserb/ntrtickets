@@ -2,7 +2,7 @@ events:
   - name: "The Prodigy"
     slug: "prodigy-2026"
     event_date: "2026-06-27"         # date of the event (for forecasting)
-    telegram_chat_id: "-5237747866"  # Telegram group/chat ID for daily reports
+    telegram_chat_id: "-5227089558"  # Telegram group/chat ID for daily reports
     report_base_url: "https://pavelserb.github.io/ntrtickets"
     sales_target:
       tickets: 6500       # target number of tickets (set when known)
