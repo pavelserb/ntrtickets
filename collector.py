@@ -220,6 +220,12 @@ def collect(*, verbose: bool = False, event_slug: str | None = None, no_telegram
             name = event["name"]
             slug = event["slug"]
             sources_cfg = event.get("sources", [])
+            event_enabled = event.get("enabled", True)
+            telegram_enabled = event.get("telegram_enabled", True)
+
+            if not event_enabled:
+                log.info("Skipping disabled event: %s (%s)", name, slug)
+                continue
 
             log.info("── Event: %s (%s) ──", name, slug)
             results: list[tuple[str, str, list[dict]]] = []
@@ -261,13 +267,15 @@ def collect(*, verbose: bool = False, event_slug: str | None = None, no_telegram
                 report_url = report_url.rstrip("/") + f"/{slug}.html"
 
             chat_id = event.get("telegram_chat_id")
-            if chat_id and not no_telegram:
+            if chat_id and telegram_enabled and not no_telegram:
                 msg = telegram_report.format_report(event, results, sources_cfg,
                                                     report_url=report_url)
                 if msg:
                     telegram_report.send(str(chat_id), msg)
                 else:
                     log.info("No data to send to Telegram for %s", slug)
+            elif chat_id and not telegram_enabled:
+                log.info("Telegram notifications disabled for %s", slug)
     finally:
         db.close()
 

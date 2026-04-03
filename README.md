@@ -34,6 +34,8 @@ python3 collector.py -v            # подробный вывод
 events:
   - name: "My Event"
     slug: "my-event-2026"
+    enabled: true                # false => ивент полностью исключается из обработки
+    telegram_enabled: true       # false => сбор + дашборд без отправки в Telegram
     sales_target:              # опционально
       tickets: 1000
       revenue: 65000
@@ -53,6 +55,8 @@ events:
         params:
           event_id: "789012"
 ```
+
+Флаги `enabled` и `telegram_enabled` опциональны. По умолчанию оба считаются `true`.
 
 ## Добавление нового источника
 

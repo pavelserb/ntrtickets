@@ -1,6 +1,8 @@
 events:
   - name: "The Prodigy"
     slug: "prodigy-2026"
+    enabled: true                    # set false to skip this event completely
+    telegram_enabled: true           # set false to collect data without Telegram message
     event_date: "2026-06-27"         # date of the event (for forecasting)
     telegram_chat_id: "-5227089558"  # Telegram group/chat ID for daily reports
     report_base_url: "https://pavelserb.github.io/ntrtickets"
