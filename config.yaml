@@ -2,7 +2,9 @@ events:
   - name: "The Prodigy"
     slug: "prodigy-2026"
     enabled: true                    # set false to skip this event completely
-    telegram_enabled: true           # set false to collect data without Telegram message
+    telegram_enabled: false           # set false to collect data without Telegram message
+    currency_code: "EUR"
+    currency_symbol: "€"
     event_date: "2026-06-27"         # date of the event (for forecasting)
     telegram_chat_id: "-5227089558"  # Telegram group/chat ID for daily reports
     report_base_url: "https://pavelserb.github.io/ntrtickets"
@@ -24,3 +26,22 @@ events:
           event_id: "496539"
           legal_person_id: "4003"
           sale_start: "2026-03-17"
+  - name: "Andrea Bocelli"
+    slug: "bocelli-2026"
+    enabled: true                    # set false to skip this event completely
+    telegram_enabled: true           # set false to collect data without Telegram message
+    currency_code: "TRY"
+    currency_symbol: "₺"
+    event_date: "2026-05-30"         # date of the event (for forecasting)
+    telegram_chat_id: "-5237747866"  # Telegram group/chat ID for daily reports
+    report_base_url: "https://pavelserb.github.io/ntrtickets"
+    sales_target:
+      tickets: 23000       # target number of tickets (set when known)
+      revenue: 100000000       # target revenue in EUR (set when known)
+    sources:
+      - type: mticket
+        provider_name: "mticket"
+        provider_link: "mticket.com.tr"
+        event_page_url: "https://mticket.com.tr/tr/istanbul/andrea-bocelli-romanza-30th-anniversary-world-tour-3594.html"
+        params:
+          event_id: "100182530"

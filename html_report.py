@@ -26,6 +26,8 @@ def generate(event: dict, sources_cfg: list[dict]) -> Path:
     target = event.get("sales_target") or {}
     target_tickets = target.get("tickets") or 0
     target_revenue = target.get("revenue") or 0
+    currency_code = event.get("currency_code", "EUR")
+    currency_symbol = event.get("currency_symbol", "€")
     event_date_str = event.get("event_date")
     event_date = date.fromisoformat(event_date_str) if event_date_str else None
 
@@ -173,6 +175,8 @@ def generate(event: dict, sources_cfg: list[dict]) -> Path:
         "targetRevenue": target_revenue,
         "sourceTotals": source_totals,
         "projection": projection_line,
+        "currencyCode": currency_code,
+        "currencySymbol": currency_symbol,
     }
 
     scorecards = {
@@ -459,6 +463,8 @@ const fmtC = (n, d=2) => n.toLocaleString('en-US', {{minimumFractionDigits:d, ma
 const fmtC1 = n => fmtC(n, 1);
 const fmtInt = n => Math.round(n).toLocaleString('en-US').replace(/,/g, ' ');
 const pct = (a,b) => b ? ((a/b)*100).toFixed(1)+'%' : '—';
+const CUR = D.currencySymbol || '€';
+const CUR_CODE = D.currencyCode || 'EUR';
 
 // Source badges
 const badgesEl = document.getElementById('sourceBadges');
@@ -490,11 +496,11 @@ addCard(row1, 'Total Tickets', fmtN(S.grandTickets),
   S.targetTickets ? `${{pct(S.grandTickets, S.targetTickets)}} of ${{fmtN(S.targetTickets)}} target` : `${{S.numDays}} days of sales`,
   S.targetTickets ? (S.grandTickets/S.targetTickets*100) : undefined);
 
-addCard(row1, 'Total Revenue', fmtInt(S.grandRevenue) + ' €',
-  S.targetRevenue ? `${{pct(S.grandRevenue, S.targetRevenue)}} of ${{fmtInt(S.targetRevenue)}} € target` : null,
+addCard(row1, 'Total Revenue', fmtInt(S.grandRevenue) + ' ' + CUR,
+  S.targetRevenue ? `${{pct(S.grandRevenue, S.targetRevenue)}} of ${{fmtInt(S.targetRevenue)}} ${{CUR}} target` : null,
   S.targetRevenue ? (S.grandRevenue/S.targetRevenue*100) : undefined);
 
-addCard(row1, 'Avg Ticket Price', fmtC1(S.avgTicketPrice) + ' €', null);
+addCard(row1, 'Avg Ticket Price', fmtC1(S.avgTicketPrice) + ' ' + CUR, null);
 
 addCard(row1, 'Daily Average Qty', fmtC1(S.avgDailyQty), `${{S.numDays}} days of sales`);
 
@@ -507,10 +513,10 @@ addCard(row2, 'Yesterday Qty', fmtN(S.lastDayTickets),
 
 const dodRClass = S.dodRevenuePct > 0 ? 'up' : S.dodRevenuePct < 0 ? 'down' : 'neutral';
 const dodRSign = S.dodRevenuePct > 0 ? '+' : '';
-addCard(row2, 'Yesterday Revenue', fmtInt(S.lastDayRevenue) + ' €',
+addCard(row2, 'Yesterday Revenue', fmtInt(S.lastDayRevenue) + ' ' + CUR,
   `<span class="${{dodRClass}}">${{dodRSign}}${{S.dodRevenuePct}}% vs prev day</span>`);
 
-addCard(row2, 'Week Avg Price', fmtC1(S.weekAvgPrice) + ' €', 'last 7 days');
+addCard(row2, 'Week Avg Price', fmtC1(S.weekAvgPrice) + ' ' + CUR, 'last 7 days');
 addCard(row2, 'Week Avg Qty', fmtC1(S.weekAvgQty), 'last 7 days');
 
 // Forecast section
@@ -632,14 +638,14 @@ new Chart(document.getElementById('chartCumRevenue'), {{
     labels: shortDates,
     datasets: [
       {{
-        label: 'Cumulative Revenue (€)',
+        label: 'Cumulative Revenue (' + CUR_CODE + ')',
         data: D.cumRevenue,
         borderColor: '#22d3ee',
         backgroundColor: 'rgba(34,211,238,0.1)',
         fill: true, tension: 0.3, pointRadius: 2,
       }},
       ...(D.targetRevenue ? [{{
-        label: 'Target (' + fmtN(D.targetRevenue) + ' €)',
+        label: 'Target (' + fmtN(D.targetRevenue) + ' ' + CUR + ')',
         data: D.dates.map(() => D.targetRevenue),
         borderColor: '#22c55e', borderDash: [6,4], pointRadius: 0, borderWidth: 2,
       }}] : [])
@@ -655,7 +661,7 @@ new Chart(document.getElementById('chartAvgPrice'), {{
     labels: shortDates,
     datasets: [
       {{
-        label: 'Daily Avg Price (€)',
+        label: 'Daily Avg Price (' + CUR_CODE + ')',
         data: D.avgPrice,
         borderColor: 'rgba(245,158,11,0.4)',
         pointRadius: 3,
@@ -750,9 +756,9 @@ const tableEl = document.getElementById('detailTable');
 const srcKeys = Object.keys(D.sources);
 let thead = '<thead><tr><th>Date</th>';
 srcKeys.forEach(k => {{
-  thead += `<th>${{D.sources[k].name}} qty</th><th>${{D.sources[k].name}} €</th>`;
+  thead += `<th>${{D.sources[k].name}} qty</th><th>${{D.sources[k].name}} ${{CUR}}</th>`;
 }});
-thead += '<th>Total qty</th><th>Total €</th><th>Avg €</th><th>Cum qty</th></tr></thead>';
+thead += '<th>Total qty</th><th>Total ' + CUR + '</th><th>Avg ' + CUR + '</th><th>Cum qty</th></tr></thead>';
 
 let tbody = '<tbody>';
 for (let i = 0; i < D.dates.length; i++) {{

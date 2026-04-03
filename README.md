@@ -36,6 +36,8 @@ events:
     slug: "my-event-2026"
     enabled: true                # false => ивент полностью исключается из обработки
     telegram_enabled: true       # false => сбор + дашборд без отправки в Telegram
+    currency_code: "EUR"         # код валюты для подписей и таблиц
+    currency_symbol: "€"         # символ валюты для карточек/Telegram
     sales_target:              # опционально
       tickets: 1000
       revenue: 65000
@@ -57,6 +59,7 @@ events:
 ```
 
 Флаги `enabled` и `telegram_enabled` опциональны. По умолчанию оба считаются `true`.
+Поля `currency_code` и `currency_symbol` тоже опциональны (по умолчанию `EUR` и `€`).
 
 ## Добавление нового источника
 

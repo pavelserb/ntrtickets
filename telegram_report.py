@@ -60,6 +60,7 @@ def format_report(
     """
     target = event.get("sales_target") or {}
     target_tickets = target.get("tickets")
+    currency_symbol = event.get("currency_symbol", "€")
 
     lines: list[str] = []
     grand_tickets = 0
@@ -101,7 +102,7 @@ def format_report(
 
         lines.append(header)
         lines.append(f"Tickets: {_fmt_number(total_tickets)} • <b>{last_day_tickets}</b> {delta}")
-        lines.append(f"Revenue: {_fmt_number(total_revenue)} €")
+        lines.append(f"Revenue: {_fmt_number(total_revenue)} {currency_symbol}")
         lines.append("")
 
     if not lines:
@@ -111,7 +112,7 @@ def format_report(
 
     lines.append("✅ TOTAL")
     lines.append(f"Tickets: {_fmt_number(grand_tickets)} • <b>{grand_last_day}</b> {grand_delta}")
-    lines.append(f"Revenue:   {_fmt_number(grand_revenue)} €")
+    lines.append(f"Revenue:   {_fmt_number(grand_revenue)} {currency_symbol}")
 
     if target_tickets and target_tickets > 0:
         lines.append("")

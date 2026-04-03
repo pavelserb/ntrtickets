@@ -158,6 +158,8 @@ def _print_report(
     target = event.get("sales_target") or {}
     target_tickets = target.get("tickets")
     target_revenue = target.get("revenue")
+    currency_code = event.get("currency_code", "EUR")
+    currency_symbol = event.get("currency_symbol", "€")
 
     print(f"\n{'=' * 60}")
     print(f"  {name}")
@@ -179,7 +181,7 @@ def _print_report(
         grand_revenue += total_revenue
 
         print(f"\n  [{provider_name}]")
-        print(f"  {'Date':<14} {'Tickets':>8} {'Revenue (EUR)':>14}")
+        print(f"  {'Date':<14} {'Tickets':>8} {f'Revenue ({currency_code})':>14}")
         print(f"  {'-' * 40}")
         for r in records:
             print(f"  {r['date']:<14} {r['tickets']:>8} {r['revenue_eur']:>14.2f}")
@@ -197,7 +199,10 @@ def _print_report(
             print(f"    Tickets: {grand_tickets} / {target_tickets} ({pct:.1f}%)")
         if target_revenue:
             pct = grand_revenue / target_revenue * 100
-            print(f"    Revenue: {grand_revenue:,.2f} / {target_revenue:,.2f} EUR ({pct:.1f}%)")
+            print(
+                f"    Revenue: {grand_revenue:,.2f} / {target_revenue:,.2f} "
+                f"{currency_symbol} ({pct:.1f}%)"
+            )
 
     print(f"\n{'=' * 60}\n")
 
