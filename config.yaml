@@ -33,7 +33,7 @@ events:
     currency_code: "TRY"
     currency_symbol: "₺"
     event_date: "2026-05-30"         # date of the event (for forecasting)
-    telegram_chat_id: "-3368114749"  # Telegram group/chat ID for daily reports
+    telegram_chat_id: "-1003368114749"  # Telegram group/chat ID for daily reports
     report_base_url: "https://pavelserb.github.io/ntrtickets"
     sales_target:
       tickets: 23000       # target number of tickets (set when known)
