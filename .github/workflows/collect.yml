@@ -43,6 +43,8 @@ jobs:
           MTICKET_DB_USER: ${{ secrets.MTICKET_DB_USER }}
           MTICKET_DB_PASSWORD: ${{ secrets.MTICKET_DB_PASSWORD }}
           MTICKET_DB_NAME: ${{ secrets.MTICKET_DB_NAME }}
+          PASSO_USERNAME: ${{ secrets.PASSO_USERNAME }}
+          PASSO_PASSWORD: ${{ secrets.PASSO_PASSWORD }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: python collector.py -v
 

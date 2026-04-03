@@ -33,11 +33,11 @@ events:
     currency_code: "TRY"
     currency_symbol: "₺"
     event_date: "2026-05-30"         # date of the event (for forecasting)
-    telegram_chat_id: "-5237747866"  # Telegram group/chat ID for daily reports
+    telegram_chat_id: "-3368114749"  # Telegram group/chat ID for daily reports
     report_base_url: "https://pavelserb.github.io/ntrtickets"
     sales_target:
       tickets: 23000       # target number of tickets (set when known)
-      revenue: 100000000       # target revenue in EUR (set when known)
+      revenue: 250000000       # target revenue in EUR (set when known)
     sources:
       - type: mticket
         provider_name: "mticket"
@@ -45,3 +45,12 @@ events:
         event_page_url: "https://mticket.com.tr/tr/istanbul/andrea-bocelli-romanza-30th-anniversary-world-tour-3594.html"
         params:
           event_id: "100182530"
+      - type: passo
+        provider_name: "Passo"
+        provider_link: "passo.com.tr"
+        event_page_url: "https://www.passo.com.tr/en/event/andrea-bocelli-besiktas-tupras-stadyumu-biletleri/10738366"
+        params:
+          report_id: "8cfa7732-52a3-4869-a663-955481c6e940"
+          model_id: "810450774"
+          event_name: "Andrea Bocelli | Romanza - 30th Anniversary World Tour 2026-05-30 20:00"
+          sale_start: "2024-01-01"

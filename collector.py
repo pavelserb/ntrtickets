@@ -33,6 +33,7 @@ log = logging.getLogger("collector")
 SOURCE_MODULES = {
     "bilesu_serviss": "sources.bilesu_serviss",
     "mticket": "sources.mticket",
+    "passo": "sources.passo",
 }
 
 

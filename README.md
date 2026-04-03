@@ -10,7 +10,8 @@ TicketBot/
 ├── config.yaml               # ивенты, источники, цели продаж
 ├── sources/
 │   ├── bilesu_serviss.py     # Biļešu Serviss (JSON API)
-│   └── mticket.py            # mticket (MySQL)
+│   ├── mticket.py            # mticket (MySQL)
+│   └── passo.py              # Passo (Power BI Report Server)
 ├── sales.db                  # локальная БД (создаётся автоматически)
 ├── .env                      # секреты подключения (не коммитить!)
 └── logs/
