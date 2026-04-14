@@ -29,7 +29,7 @@ events:
   - name: "Andrea Bocelli"
     slug: "bocelli-2026"
     enabled: true                    # set false to skip this event completely
-    telegram_enabled: true           # set false to collect data without Telegram message
+    telegram_enabled: false           # set false to collect data without Telegram message
     currency_code: "TRY"
     currency_symbol: "₺"
     event_date: "2026-05-30"         # date of the event (for forecasting)
